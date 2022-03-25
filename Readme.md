@@ -24,6 +24,12 @@
 
 //leancloud 云服务 implementation 'cn.leancloud:realtime-android:7.2.3' implementation 'cn.leancloud:storage-android:7.2.3' implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
-//扫一扫依赖 implementation 'cn.yipianfengye.android:zxing-library:2.2'
+//全屏显示 编译时：要在gradle.properties中 加上 android.enableJetifier=true
+implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
+
+// 华为扫一扫库 在 settings.gradle（高版本AndroidStudio）或 项目的build.gradle(低版本)的repositories中
+// 加上  maven { url 'https://developer.huawei.com/repo/'}
+implementation 'com.huawei.hms:scanplus:1.1.1.301'
+
 
 //本库git地址 implementation 'com.github.LLJ-1175637511:IOT-Libruary:v1.0.1'
