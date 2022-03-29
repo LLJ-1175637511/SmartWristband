@@ -2,6 +2,9 @@ package com.android.main
 
 import android.annotation.SuppressLint
 import androidx.activity.viewModels
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.android.main.databinding.ActivityMainBinding
 import com.llj.baselib.IOTViewModel
 import com.llj.baselib.ui.IOTMainActivity
@@ -57,6 +60,16 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>() {
 
     override fun webState(state: IOTViewModel.WebSocketType) {
         mDataBinding.tvState.text = state.name
+    }
+
+    private fun showDialog(df: DialogFragment, tag: String) {
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val prev: Fragment? = supportFragmentManager.findFragmentByTag(tag)
+        if (prev != null) {
+            ft.remove(prev)
+        }
+        ft.addToBackStack(null)
+        df.show(ft, tag)
     }
 
 }
