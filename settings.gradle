@@ -11,7 +11,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven {  url "https://oss.sonatype.org/content/groups/public" }
     }
 }
-rootProject.name = "CommonLib"
+rootProject.name = "SmartWristband"
 include ':app'

@@ -1,4 +1,4 @@
-package com.android.main
+package com.location.main
 
 import com.llj.baselib.IOTViewModel
 

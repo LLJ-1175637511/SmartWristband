@@ -1,14 +1,14 @@
-package com.android.main
+package com.location.main
 
 import android.annotation.SuppressLint
 import androidx.activity.viewModels
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.android.main.databinding.ActivityMainBinding
 import com.llj.baselib.IOTViewModel
 import com.llj.baselib.ui.IOTMainActivity
 import com.llj.baselib.utils.ToastUtils
+import com.location.main.databinding.ActivityMainBinding
 
 class MainActivity : IOTMainActivity<ActivityMainBinding>() {
 
@@ -18,7 +18,7 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>() {
 
     override fun init() {
         super.init()
-        vm.connect(this, MainDataBean::class.java)
+//        vm.connect(this, MainDataBean::class.java)
         initMainView()
     }
 
@@ -42,6 +42,7 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>() {
 //        }
 //    }
 
+
     @SuppressLint("ResourceAsColor")
     override fun offDevLine() {
         mDataBinding.tvDevState.setTextColor(R.color.red)
@@ -59,7 +60,6 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>() {
     }
 
     override fun webState(state: IOTViewModel.WebSocketType) {
-        mDataBinding.tvState.text = state.name
     }
 
     private fun showDialog(df: DialogFragment, tag: String) {

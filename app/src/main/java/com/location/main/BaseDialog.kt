@@ -1,4 +1,4 @@
-package com.android.main
+package com.location.main
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import com.android.main.R
 
 abstract class BaseDialog<DB : ViewDataBinding> : DialogFragment() {
 
