@@ -23,8 +23,7 @@ class LoginActivity : IOTLoginActivity<ActivityLoginBinding>() {
             etUserNameLogin.setText(getUserInfo().first)
             etUserPwdLogin.setText(getUserInfo().second)
             btLogin.setOnClickListener {
-//                login(etUserNameLogin.text.toString(),etUserPwdLogin.text.toString(), MainActivity::class.java)
-                login(etUserNameLogin.text.toString(),etUserPwdLogin.text.toString(), TestActivity::class.java)
+                login(etUserNameLogin.text.toString(),etUserPwdLogin.text.toString(), MainActivity::class.java)
             }
         }
     }

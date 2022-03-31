@@ -23,9 +23,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            signingConfig signingConfigs.debug
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -37,14 +34,7 @@ android {
     buildFeatures {
         dataBinding true
     }
-    signingConfigs {
-        debug {
-            storeFile file('/Users/zhihu/AndroidStudioProjects/locSign.jks')
-            storePassword 'liulinjie'
-            keyAlias = 'key'
-            keyPassword 'liulinjie'
-        }
-    }
+
 }
 
 dependencies {
@@ -67,5 +57,8 @@ dependencies {
     // 地图组件库，包括小车平移、点聚合等组件功能，详见开发指南。
     implementation 'com.tencent.map:sdk-utilities:1.0.6'
     implementation 'com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.31"
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 
 }

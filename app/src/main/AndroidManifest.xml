@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="TencentMapSDK"
-            android:value="S47BZ-UWMWW-SPDRV-OO2OD-DCYAQ-CCBPG"/>
+            android:value="MTTBZ-VINC5-FDYIK-QLHDG-NPJCF-Q7FCT"/>
         <activity
             android:name="com.location.main.LoginActivity"
             android:exported="true">
@@ -36,7 +36,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.location.main.MainActivity"/>
-        <activity android:name=".TestActivity" />
 
 
     </application>
