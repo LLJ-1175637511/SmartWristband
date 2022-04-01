@@ -32,6 +32,7 @@
     <color name="qq_red">#ff0000</color>
     <color name="qq_red_dark">#aa0000</color>
     <color name="qq_gray_dark">#9c9c9c</color>
+    <color name="qq_gray_dark_low">#86858484</color>
     <color name="qq_section_text_color">#8c8c8c</color>
     <color name="black_1">#070606</color>
     <color name="qq_blue">#00acff</color>
@@ -40,4 +41,5 @@
     <color name="grey">#272626</color>
     <color name="half_white">#80FFFFFF</color>
     <color name="half_blue">#8800ACFF</color>
+    <color name="common_bg">#E4E1E1</color>
 </resources>

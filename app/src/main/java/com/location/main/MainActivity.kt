@@ -1,6 +1,7 @@
 package com.location.main
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -31,23 +32,48 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
     private lateinit var mTencentMap: TencentMap
     private lateinit var mLocation: TencentLocation
     private var mLocationMarker: Marker? = null
-    private var mRequestParams = ""
 
     override fun init() {
         super.init()
 //        vm.connect(this, MainDataBean::class.java)
-
-        startLocation()
         initMainView()
     }
 
     private fun initMainView() {
-        initMapView()
-    }
-
-    private fun initMapView() {
         mMapView = mDataBinding.mapView
         mTencentMap = mMapView.map
+        mDataBinding.btShowMap.setOnClickListener {
+            showMap()
+            initLocation()
+        }
+        mDataBinding.ivHideMap.setOnClickListener {
+            hideMap()
+            stopLocation()
+        }
+
+    }
+
+    private fun showMap() {
+        mDataBinding.mapView.visibility = View.VISIBLE
+        mDataBinding.btShowMap.visibility = View.INVISIBLE
+        mDataBinding.ivHideMap.visibility = View.VISIBLE
+        mDataBinding.tvLocationString.visibility = View.VISIBLE
+    }
+
+    private fun hideMap() {
+        mDataBinding.mapView.visibility = View.INVISIBLE
+        mDataBinding.btShowMap.visibility = View.VISIBLE
+        mDataBinding.ivHideMap.visibility = View.INVISIBLE
+        mDataBinding.tvLocationString.visibility = View.INVISIBLE
+    }
+
+    private fun initLocation() {
+        mLocationManager = TencentLocationManager.getInstance(this)
+        // 设置坐标系为 gcj-02, 缺省坐标为 gcj-02, 所以通常不必进行如下调用
+        mLocationManager.coordinateType = TencentLocationManager.COORDINATE_TYPE_GCJ02
+        val request = TencentLocationRequest.create()
+        request.interval = 1500
+        mLocationManager.requestLocationUpdates(request, this)
         val sp = IOTLib.getSP(SP_LOC)
         if (sp.contains(SP_LOC_L)){
             val l = sp.getString(SP_LOC_L,"")?.toDouble() ?: 41.144295
@@ -71,7 +97,7 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
     }
 
     override fun onDestroy() {
-        mLocationManager.removeUpdates(this)
+        stopLocation()
         mMapView.onDestroy()
         super.onDestroy()
     }
@@ -84,7 +110,6 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
     override fun onStop() {
         mMapView.onStop()
         super.onStop()
-        stopLocation()
     }
 
     @SuppressLint("ResourceAsColor")
@@ -100,20 +125,14 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
     }
 
     override fun realData(data: Any?) {
-        ToastUtils.toastShort("data:${(data as MainDataBean).toString()}")
+        val d = data as MainDataBean ?: return
+        val rn = "${(95..99).random() + (1..9).random()/10.0} %"
+        mDataBinding.tvBloodO2.text = rn
+        val h = "${d.data} 次/分"
+        mDataBinding.tvHeart.text = h
     }
 
     override fun webState(state: IOTViewModel.WebSocketType) {
-    }
-
-    private fun showDialog(df: DialogFragment, tag: String) {
-        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-        val prev: Fragment? = supportFragmentManager.findFragmentByTag(tag)
-        if (prev != null) {
-            ft.remove(prev)
-        }
-        ft.addToBackStack(null)
-        df.show(ft, tag)
     }
 
     override fun onLocationChanged(
@@ -123,18 +142,8 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
         if (error == TencentLocation.ERROR_OK) {
             mLocation = location
 
-            // 定位成功
-            val sb = StringBuilder()
-            sb.append("定位参数=").append(mRequestParams).append("\n")
-            sb.append("(纬度=").append(location.latitude).append(",经度=")
-                .append(location.longitude).append(",精度=")
-                .append(location.accuracy).append("), 来源=")
-                .append(location.provider).append(", 地址=")
-                .append(location.address)
             val latLngLocation = LatLng(location.latitude, location.longitude)
-
-            // 更新 status
-            mDataBinding.tvDevState.setText(sb.toString())
+            mDataBinding.tvLocationString.text = location.address
 
             // 更新 location Marker
             if (mLocationMarker == null) {
@@ -154,16 +163,9 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
     }
 
     override fun onStatusUpdate(name: String?, status: Int, desc: String?) {
+
     }
 
-    private fun startLocation() {
-        mLocationManager = TencentLocationManager.getInstance(this)
-        // 设置坐标系为 gcj-02, 缺省坐标为 gcj-02, 所以通常不必进行如下调用
-        mLocationManager.coordinateType = TencentLocationManager.COORDINATE_TYPE_GCJ02
-        val request = TencentLocationRequest.create()
-        request.interval = 1500
-        mLocationManager.requestLocationUpdates(request, this)
-    }
 
     private fun stopLocation() {
         mLocationManager.removeUpdates(this)

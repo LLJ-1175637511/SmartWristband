@@ -35,7 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.location.main.MainActivity"/>
+        <activity android:name="com.location.main.MainActivity"
+            android:theme="@style/AppTheme.Main"/>
 
 
     </application>
