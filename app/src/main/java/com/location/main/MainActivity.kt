@@ -75,7 +75,7 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>(), TencentLocationList
         request.interval = 1500
         mLocationManager.requestLocationUpdates(request, this)
         val sp = IOTLib.getSP(SP_LOC)
-        if (sp.contains(SP_LOC_L)){
+        if (sp.contains(SP_LOC_L) && mLocationMarker == null){
             val l = sp.getString(SP_LOC_L,"")?.toDouble() ?: 41.144295
             val r = sp.getString(SP_LOC_R,"")?.toDouble() ?: 121.122749
             mLocationMarker = mTencentMap.addMarker(
