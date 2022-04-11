@@ -27,7 +27,7 @@
             android:name="TencentMapSDK"
             android:value="MTTBZ-VINC5-FDYIK-QLHDG-NPJCF-Q7FCT"/>
         <activity
-            android:name="com.location.main.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,8 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.location.main.MainActivity"
-            android:theme="@style/AppTheme.Main"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".MineActivity" />
 
 
     </application>
