@@ -9,7 +9,9 @@
         android:background="@color/common_bg"
         tools:context="com.android.main.com.location.main.MainActivity">
 
-        <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clUserInfo"
@@ -70,7 +72,6 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/shape_rect_white"
             app:layout_constraintEnd_toEndOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="@+id/imageView3"
@@ -199,20 +200,34 @@
             android:textColor="@color/red"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <TextView
             android:id="@+id/btShowMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_rect_blue_low"
             android:text="查看定位"
-            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textColor="@color/qq_blue"
             app:layout_constraintBottom_toTopOf="@+id/tv_dev_state"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btBloodO2Data"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <Switch
+            android:id="@+id/btBloodO2Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="15dp"
+            android:text="检测血氧"
+            android:textColor="@color/grey_dark"
+            app:layout_constraintBottom_toBottomOf="@+id/btShowMap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btShowMap"
+            app:layout_constraintTop_toTopOf="@+id/btShowMap"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <ImageView
             android:id="@+id/imageView3"

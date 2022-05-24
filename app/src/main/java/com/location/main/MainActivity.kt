@@ -41,8 +41,15 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>() {
         mDataBinding.btShowMap.setOnClickListener {
             startCommonActivity<MapActivity>()
         }
+        mDataBinding.btBloodO2Data.isChecked = vm.isTesting
+        mDataBinding.btBloodO2Data.setOnClickListener {
+            if (mDataBinding.btBloodO2Data.isChecked) {
+                vm.startTesting()
+            } else {
+                vm.stopTesting()
+            }
+        }
     }
-
 
     @SuppressLint("ResourceAsColor")
     override fun offDevLine() {
@@ -56,12 +63,19 @@ class MainActivity : IOTMainActivity<ActivityMainBinding>() {
         mDataBinding.tvDevState.text = "设备在线"
     }
 
+    @SuppressLint("SetTextI18n")
     override fun realData(data: Any?) {
-        val d = data as MainDataBean ?: return
-        val rn = "${(95..99).random() + (1..9).random()/10.0} %"
-        mDataBinding.tvBloodO2.text = rn
-        val h = "${d.data} 次/分"
+        if (!vm.isTesting || data == null) return
+        val d = data as MainDataBean
+//        val rn = "${(95..99).random() + (1..9).random()/10.0} %"
+//        mDataBinding.tvBloodO2.text = rn
+        mDataBinding.tvBloodO2.text = "${(d.o2 * 10).toInt() / 10}%"
+
+        val h = "${(d.blood * 10).toInt() / 10} 次/分"
         mDataBinding.tvHeart.text = h
+
+        val state = if (d.tilt == 1) "摔倒" else "正常"
+        mDataBinding.tvFallDown.text = state
     }
 
     override fun webState(state: IOTViewModel.WebSocketType) {
